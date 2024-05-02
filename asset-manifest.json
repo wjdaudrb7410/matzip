@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/matzip/static/css/main.c228243a.css",
-    "main.js": "/matzip/static/js/main.b3523c5a.js",
+    "main.css": "/matzip/static/css/main.1b054bdc.css",
+    "main.js": "/matzip/static/js/main.66536bcc.js",
     "static/media/noto-sans-kr-v8-korean_latin-900.eot": "/matzip/static/media/noto-sans-kr-v8-korean_latin-900.977a4e50d69b3eeaa127.eot",
     "static/media/noto-sans-kr-v8-korean_latin-700.eot": "/matzip/static/media/noto-sans-kr-v8-korean_latin-700.07ec9913a6c63bb915f3.eot",
     "static/media/noto-sans-kr-v8-korean_latin-100.eot": "/matzip/static/media/noto-sans-kr-v8-korean_latin-100.544321b1520d9fe00d85.eot",
@@ -31,11 +31,11 @@
     "static/media/noto-sans-kr-v8-korean_latin-regular.svg": "/matzip/static/media/noto-sans-kr-v8-korean_latin-regular.c9f0e3c43e9a376e715a.svg",
     "static/media/slick.woff": "/matzip/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/matzip/index.html",
-    "main.c228243a.css.map": "/matzip/static/css/main.c228243a.css.map",
-    "main.b3523c5a.js.map": "/matzip/static/js/main.b3523c5a.js.map"
+    "main.1b054bdc.css.map": "/matzip/static/css/main.1b054bdc.css.map",
+    "main.66536bcc.js.map": "/matzip/static/js/main.66536bcc.js.map"
   },
   "entrypoints": [
-    "static/css/main.c228243a.css",
-    "static/js/main.b3523c5a.js"
+    "static/css/main.1b054bdc.css",
+    "static/js/main.66536bcc.js"
   ]
 }
