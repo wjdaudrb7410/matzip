@@ -26,7 +26,6 @@ const instance = axios.create({
 });
 export const SearchKey = ({ queryKey }) => {
   const [MainService, Service, Keyword, pages, areaCode] = queryKey;
-  console.log(queryKey);
   return instance
     .get(
       `${MainService}/${Service}?keyword=${Keyword}&pageNo=${pages}&areaCode=${areaCode}`

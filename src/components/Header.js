@@ -22,14 +22,14 @@ export const Header = () => {
   return (
     <>
       <Box
+        padding={"20px 0"}
         width={"100%"}
-        h={"80px"}
         position={"sticky"}
         top={0}
-        color={Mycolor.Text}
         display={"flex"}
         flexDirection={"column"}
         bg={Mycolor.ContentWrap}
+        zIndex={3}
       >
         <Box
           display={"flex"}
@@ -57,7 +57,7 @@ export const Header = () => {
           </HStack>
         </Box>
 
-        <Box as="form" marginTop={"20px"} display={isclick ? "block" : "none"}>
+        <Box as="form" margin={"20px 0"} display={isclick ? "block" : "none"}>
           <Input placeholder="음식점 이름을 검색하세요" />
         </Box>
       </Box>

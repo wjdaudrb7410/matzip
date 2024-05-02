@@ -3,28 +3,48 @@ import {
   Container,
   HStack,
   Icon,
+  Image,
   Spinner,
   Text,
   VStack,
 } from "@chakra-ui/react";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import { Header } from "../../components/Header";
 import { HelmetTitle } from "../../components/HelmetTitle";
-import { Mycolor } from "../../theme";
-import "swiper/css";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Mycolor, NO_IMG } from "../../theme";
+
 import { CircleFlag } from "react-circle-flags";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Code, SearchKey, ServiceArea, ServiceName } from "../../api";
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
+import Slider from "react-slick";
+import { Footer } from "../../components/Footer";
+const settings = {
+  infinite: true,
+  speed: 500,
+  slidesToShow: 3,
+  slidesToScroll: 3,
+  touchThreshold: 100,
+};
 const Menu = [
   { index: 0, title: "한식", keyword: "한", countryCode: "kr" },
   { index: 1, title: "중식", keyword: "반점", countryCode: "cn" },
   { index: 2, title: "일식", keyword: "스시", countryCode: "jp" },
   { index: 3, title: "양식", keyword: "한", countryCode: "us" },
 ];
+const Recommend = [
+  { title: "국밥", index: 101 },
+  { title: "고기", index: 102 },
+  { title: "회", index: 103 },
+];
 export const Home = () => {
   const [currentMenu, SetMenu] = useState("한");
-  const [currentIndex, SetIndex] = useState(1);
+  const [currentIndex, SetIndex] = useState(0);
+  const [currentCount, SetCount] = useState("한식");
+  const [recmData, SetRData] = useState();
+  const [MenuData, SetData] = useState();
 
   const { data: mdata, isLoading: misLoading } = useQuery({
     queryKey: [
@@ -37,7 +57,48 @@ export const Home = () => {
     queryFn: SearchKey,
     enable: !!currentMenu,
   });
-  console.log(mdata);
+  const { data: r1data, isLoading: r1Loading } = useQuery({
+    queryKey: [
+      ServiceArea.Korea,
+      ServiceName.Search,
+      Recommend[0].title,
+      1,
+      Code.AreaCode,
+    ],
+    queryFn: SearchKey,
+  });
+  const { data: r2data, isLoading: r2Loading } = useQuery({
+    queryKey: [
+      ServiceArea.Korea,
+      ServiceName.Search,
+      Recommend[1].title,
+      1,
+      Code.AreaCode,
+    ],
+    queryFn: SearchKey,
+  });
+  const { data: r3data, isLoading: r3Loading } = useQuery({
+    queryKey: [
+      ServiceArea.Korea,
+      ServiceName.Search,
+      Recommend[2].title,
+      1,
+      Code.AreaCode,
+    ],
+    queryFn: SearchKey,
+  });
+
+  useEffect(() => {
+    SetData(mdata?.response?.body);
+  }, [mdata]);
+  useEffect(() => {
+    SetRData([
+      { ...r1data?.response?.body, ...Recommend[0] },
+      { ...r2data?.response?.body, ...Recommend[1] },
+      { ...r3data?.response?.body, ...Recommend[2] },
+    ]);
+  }, [r1data, r2data, r3data]);
+  console.log(recmData);
   return (
     <>
       <HelmetTitle title={"Home"} />
@@ -49,8 +110,9 @@ export const Home = () => {
         alignItems={"center"}
       >
         <Header />
+        {/*컨텐츠영역 */}
         <Box
-          marginTop={50}
+          marginTop={30}
           width={"100%"}
           display={"flex"}
           flexDirection={"column"}
@@ -68,6 +130,7 @@ export const Home = () => {
                 onClick={() => {
                   SetMenu(data.keyword);
                   SetIndex(data.index);
+                  SetCount(data.title);
                 }}
               >
                 <CircleFlag
@@ -76,7 +139,9 @@ export const Home = () => {
                   height={"60px"}
                   style={{
                     border:
-                      currentIndex === data.index ? "2px solid white" : "none",
+                      currentIndex === data.index
+                        ? `2px solid ${Mycolor.Point}`
+                        : "none",
                     borderRadius: "50%",
                   }}
                 />
@@ -84,6 +149,7 @@ export const Home = () => {
               </VStack>
             ))}
           </HStack>
+
           {misLoading ? (
             <Box
               width={"100%"}
@@ -101,9 +167,125 @@ export const Home = () => {
               ></Spinner>
             </Box>
           ) : (
-            <></>
+            MenuData && (
+              <>
+                <Box width={"100%"} marginTop={"20px"}>
+                  <Text fontSize={20}>{currentCount} 잘하는 맛집</Text>
+
+                  <VStack spacing={"30px"} marginTop={"20px"}>
+                    {MenuData?.items?.item.map((data) => (
+                      <Box
+                        w={"100%"}
+                        h={"300px"}
+                        key={data.contentid}
+                        bg={Mycolor.DataCover}
+                        borderRadius={12}
+                        overflow={"hidden"}
+                      >
+                        <Link to={`/detail/${data.contentid}`}>
+                          {data?.firstimage ? (
+                            <Image
+                              w={"100%"}
+                              h={"180px"}
+                              src={data.firstimage}
+                              alt={data.title}
+                              objectFit={"cover"}
+                            />
+                          ) : (
+                            <Image
+                              w={"100%"}
+                              h={"180px"}
+                              src={NO_IMG}
+                              alt={data.title}
+                              objectFit={"cover"}
+                            />
+                          )}
+                          <VStack
+                            spacing={3}
+                            padding={"0 10px"}
+                            alignItems={"start"}
+                            h={"120px"}
+                            justifyContent={"center"}
+                            fontSize={"14px"}
+                          >
+                            <Text>{data.title}</Text>
+                            <Text>{data.addr1}</Text>
+                          </VStack>
+                        </Link>
+                      </Box>
+                    ))}
+                  </VStack>
+                </Box>
+                {recmData && (
+                  <>
+                    <Box marginTop={50} w={"100%"} overflow={"hidden"}>
+                      <Text>당신을 위한 추천</Text>
+                      {recmData?.map((data) => (
+                        <VStack
+                          key={data.index}
+                          alignItems={"flex-start"}
+                          marginTop={"30px"}
+                        >
+                          <Text>{data.title}</Text>
+                          <Box w={"100%"} marginTop={"20px"}>
+                            <Slider {...settings}>
+                              {data?.items?.item.map((data) => (
+                                <Box
+                                  w={"150px"}
+                                  h={"200px"}
+                                  key={data.contentid}
+                                  borderRadius={"15px"}
+                                  overflow={"hidden"}
+                                  bg={Mycolor.DataCover}
+                                  fontSize={"10px"}
+                                  fontWeight={300}
+                                >
+                                  <Link to={`/detail/${data.contentid}`}>
+                                    {data?.firstimage ? (
+                                      <>
+                                        <Image
+                                          src={data.firstimage}
+                                          width={"100%"}
+                                          h={"120px"}
+                                          objectFit={"cover"}
+                                        ></Image>
+                                      </>
+                                    ) : (
+                                      <>
+                                        <Image
+                                          src={NO_IMG}
+                                          width={"100%"}
+                                          h={"120px"}
+                                          objectFit={"cover"}
+                                        ></Image>
+                                      </>
+                                    )}
+                                    <VStack
+                                      spacing={1}
+                                      padding={"0 10px"}
+                                      alignItems={"start"}
+                                      h={"80px"}
+                                      justifyContent={"center"}
+                                    >
+                                      <Text>{data.title}</Text>
+                                      <Text>{data.addr1}</Text>
+                                    </VStack>
+                                  </Link>
+                                </Box>
+                              ))}
+                            </Slider>
+                          </Box>
+                        </VStack>
+                      ))}
+                    </Box>
+                  </>
+                )}
+              </>
+            )
           )}
         </Box>
+        {/*컨텐츠영역 */}
+        <Footer></Footer>
       </Container>
     </>
   );
