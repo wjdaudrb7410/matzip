@@ -25,7 +25,7 @@ const settings = {
   infinite: true,
   speed: 500,
   slidesToShow: 3,
-  slidesToScroll: 1,
+  slidesToScroll: 3,
   touchThreshold: 30,
 };
 const Menu = [
@@ -228,7 +228,12 @@ export const Home = () => {
                           marginTop={"30px"}
                         >
                           <Text>{data.title}</Text>
-                          <Box w={"100%"} h={"200px"} marginTop={"20px"}>
+                          <Box
+                            w={"100%"}
+                            h={"200px"}
+                            marginTop={"20px"}
+                            className="slider-container"
+                          >
                             <Slider {...settings}>
                               {data?.items?.item.map((data) => (
                                 <Box
