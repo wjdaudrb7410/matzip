@@ -1,0 +1,41 @@
+{
+  "files": {
+    "main.css": "/takeoff/static/css/main.1c04d4a2.css",
+    "main.js": "/takeoff/static/js/main.b3523c5a.js",
+    "static/media/noto-sans-kr-v8-korean_latin-900.eot": "/takeoff/static/media/noto-sans-kr-v8-korean_latin-900.977a4e50d69b3eeaa127.eot",
+    "static/media/noto-sans-kr-v8-korean_latin-700.eot": "/takeoff/static/media/noto-sans-kr-v8-korean_latin-700.07ec9913a6c63bb915f3.eot",
+    "static/media/noto-sans-kr-v8-korean_latin-100.eot": "/takeoff/static/media/noto-sans-kr-v8-korean_latin-100.544321b1520d9fe00d85.eot",
+    "static/media/noto-sans-kr-v8-korean_latin-300.eot": "/takeoff/static/media/noto-sans-kr-v8-korean_latin-300.181df63144c284dd0f04.eot",
+    "static/media/noto-sans-kr-v8-korean_latin-regular.eot": "/takeoff/static/media/noto-sans-kr-v8-korean_latin-regular.454d0149a721de29dd96.eot",
+    "static/media/noto-sans-kr-v8-korean_latin-500.eot": "/takeoff/static/media/noto-sans-kr-v8-korean_latin-500.888b90f39ee8a7a38afb.eot",
+    "static/media/noto-sans-kr-v8-korean_latin-700.woff": "/takeoff/static/media/noto-sans-kr-v8-korean_latin-700.26cf87506c6d1221026c.woff",
+    "static/media/noto-sans-kr-v8-korean_latin-900.woff": "/takeoff/static/media/noto-sans-kr-v8-korean_latin-900.fb7c8157a76879a22ff8.woff",
+    "static/media/noto-sans-kr-v8-korean_latin-500.woff": "/takeoff/static/media/noto-sans-kr-v8-korean_latin-500.1da2cce45610c4fec562.woff",
+    "static/media/noto-sans-kr-v8-korean_latin-regular.woff": "/takeoff/static/media/noto-sans-kr-v8-korean_latin-regular.029c8206c92c4a0fef4e.woff",
+    "static/media/noto-sans-kr-v8-korean_latin-300.woff": "/takeoff/static/media/noto-sans-kr-v8-korean_latin-300.12f5f6de07f4452d7c77.woff",
+    "static/media/noto-sans-kr-v8-korean_latin-100.woff": "/takeoff/static/media/noto-sans-kr-v8-korean_latin-100.17d845b58fecb2caf456.woff",
+    "static/media/noto-sans-kr-v8-korean_latin-700.woff2": "/takeoff/static/media/noto-sans-kr-v8-korean_latin-700.1c3cd005b4e104ef038a.woff2",
+    "static/media/noto-sans-kr-v8-korean_latin-900.woff2": "/takeoff/static/media/noto-sans-kr-v8-korean_latin-900.e715489aa4c2e0e9f531.woff2",
+    "static/media/noto-sans-kr-v8-korean_latin-500.woff2": "/takeoff/static/media/noto-sans-kr-v8-korean_latin-500.192871a7ecf6f0aacae7.woff2",
+    "static/media/noto-sans-kr-v8-korean_latin-regular.woff2": "/takeoff/static/media/noto-sans-kr-v8-korean_latin-regular.81cf96d6e18fbf3112f5.woff2",
+    "static/media/noto-sans-kr-v8-korean_latin-300.woff2": "/takeoff/static/media/noto-sans-kr-v8-korean_latin-300.918abc234b93f8522829.woff2",
+    "static/media/noto-sans-kr-v8-korean_latin-100.woff2": "/takeoff/static/media/noto-sans-kr-v8-korean_latin-100.ccff4957628ba003d56c.woff2",
+    "static/media/slick.svg": "/takeoff/static/media/slick.2630a3e3eab21c607e21.svg",
+    "static/media/slick.eot": "/takeoff/static/media/slick.a4e97f5a2a64f0ab1323.eot",
+    "static/media/slick.ttf": "/takeoff/static/media/slick.c94f7671dcc99dce43e2.ttf",
+    "static/media/noto-sans-kr-v8-korean_latin-100.svg": "/takeoff/static/media/noto-sans-kr-v8-korean_latin-100.c9f0e3c43e9a376e715a.svg",
+    "static/media/noto-sans-kr-v8-korean_latin-300.svg": "/takeoff/static/media/noto-sans-kr-v8-korean_latin-300.c9f0e3c43e9a376e715a.svg",
+    "static/media/noto-sans-kr-v8-korean_latin-500.svg": "/takeoff/static/media/noto-sans-kr-v8-korean_latin-500.c9f0e3c43e9a376e715a.svg",
+    "static/media/noto-sans-kr-v8-korean_latin-700.svg": "/takeoff/static/media/noto-sans-kr-v8-korean_latin-700.c9f0e3c43e9a376e715a.svg",
+    "static/media/noto-sans-kr-v8-korean_latin-900.svg": "/takeoff/static/media/noto-sans-kr-v8-korean_latin-900.c9f0e3c43e9a376e715a.svg",
+    "static/media/noto-sans-kr-v8-korean_latin-regular.svg": "/takeoff/static/media/noto-sans-kr-v8-korean_latin-regular.c9f0e3c43e9a376e715a.svg",
+    "static/media/slick.woff": "/takeoff/static/media/slick.295183786cd8a1389865.woff",
+    "index.html": "/takeoff/index.html",
+    "main.1c04d4a2.css.map": "/takeoff/static/css/main.1c04d4a2.css.map",
+    "main.b3523c5a.js.map": "/takeoff/static/js/main.b3523c5a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1c04d4a2.css",
+    "static/js/main.b3523c5a.js"
+  ]
+}
