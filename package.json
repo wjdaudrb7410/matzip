@@ -38,7 +38,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "homepage": "https://wjdaudrb7410.github.io/takeoff/#/Intro",
+  "homepage": "https://wjdaudrb7410.github.io/matzip/#/",
   "eslintConfig": {
     "extends": [
       "react-app",
