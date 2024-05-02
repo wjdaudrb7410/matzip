@@ -9,8 +9,6 @@ export const Footer = () => {
         marginTop={"30px"}
         padding={"20px 0"}
         width={"100%"}
-        position={"sticky"}
-        bottom={0}
         display={"flex"}
         flexDirection={"column"}
         bg={Mycolor.ContentWrap}

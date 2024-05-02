@@ -2,7 +2,6 @@ import {
   Box,
   Container,
   HStack,
-  Icon,
   Image,
   Spinner,
   Text,
@@ -10,12 +9,13 @@ import {
 } from "@chakra-ui/react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import "../../components/SlickStyle.css";
 import { Header } from "../../components/Header";
 import { HelmetTitle } from "../../components/HelmetTitle";
 import { Mycolor, NO_IMG } from "../../theme";
 
 import { CircleFlag } from "react-circle-flags";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Code, SearchKey, ServiceArea, ServiceName } from "../../api";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
@@ -25,8 +25,8 @@ const settings = {
   infinite: true,
   speed: 500,
   slidesToShow: 3,
-  slidesToScroll: 3,
-  touchThreshold: 100,
+  slidesToScroll: 1,
+  touchThreshold: 30,
 };
 const Menu = [
   { index: 0, title: "한식", keyword: "한", countryCode: "kr" },
@@ -103,6 +103,7 @@ export const Home = () => {
     <>
       <HelmetTitle title={"Home"} />
       <Container
+        maxW={"500px"}
         padding={"0 20px"}
         bg={Mycolor.ContentWrap}
         display={"flex"}
@@ -208,8 +209,8 @@ export const Home = () => {
                             justifyContent={"center"}
                             fontSize={"14px"}
                           >
-                            <Text>{data.title}</Text>
-                            <Text>{data.addr1}</Text>
+                            <Text fontSize={"16px"}>{data.title}</Text>
+                            <Text opacity={0.7}>{data.addr1}</Text>
                           </VStack>
                         </Link>
                       </Box>
@@ -227,7 +228,7 @@ export const Home = () => {
                           marginTop={"30px"}
                         >
                           <Text>{data.title}</Text>
-                          <Box w={"100%"} marginTop={"20px"}>
+                          <Box w={"100%"} h={"200px"} marginTop={"20px"}>
                             <Slider {...settings}>
                               {data?.items?.item.map((data) => (
                                 <Box
@@ -237,7 +238,7 @@ export const Home = () => {
                                   borderRadius={"15px"}
                                   overflow={"hidden"}
                                   bg={Mycolor.DataCover}
-                                  fontSize={"10px"}
+                                  fontSize={"16px"}
                                   fontWeight={300}
                                 >
                                   <Link to={`/detail/${data.contentid}`}>
@@ -268,7 +269,6 @@ export const Home = () => {
                                       justifyContent={"center"}
                                     >
                                       <Text>{data.title}</Text>
-                                      <Text>{data.addr1}</Text>
                                     </VStack>
                                   </Link>
                                 </Box>

@@ -1,4 +1,5 @@
 import { extendTheme } from "@chakra-ui/react";
+import { color } from "framer-motion";
 
 import "typeface-notosans-kor";
 export const NO_IMG =
@@ -26,6 +27,9 @@ const theme = extendTheme({
       p: {
         color: Mycolor.Text,
         letterSpacing: "tight",
+      },
+      input: {
+        color: Mycolor.Text,
       },
     },
   },

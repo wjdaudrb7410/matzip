@@ -22,9 +22,10 @@ export const Header = () => {
   return (
     <>
       <Box
-        padding={"20px 0"}
+        maxW={"500px"}
+        padding={"20px 20px"}
         width={"100%"}
-        position={"sticky"}
+        position={"fixed"}
         top={0}
         display={"flex"}
         flexDirection={"column"}
