@@ -14,8 +14,18 @@ import { MdLocalDining } from "react-icons/md";
 import { FaSearch } from "react-icons/fa";
 import { useState } from "react";
 import { routes } from "../routes";
+import { useForm } from "react-hook-form";
+import { ErrText } from "./ErrText";
 
 export const Header = () => {
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const [isclick, SetClick] = useState(false);
   const current = useLocation();
   const nav = useNavigate();
@@ -58,8 +68,17 @@ export const Header = () => {
           </HStack>
         </Box>
 
-        <Box as="form" margin={"20px 0"} display={isclick ? "block" : "none"}>
-          <Input placeholder="음식점 이름을 검색하세요" />
+        <Box
+          as="form"
+          margin={"20px 0"}
+          display={isclick ? "block" : "none"}
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <Input
+            placeholder="음식점 이름을 검색하세요"
+            {...register("Keyword", { required: "키워드를 입력하세요" })}
+          />
+          <ErrText Texts={errors?.Keyword?.message}></ErrText>
         </Box>
       </Box>
     </>

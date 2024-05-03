@@ -18,8 +18,8 @@ export const Router = () => {
           <Route path={routes.Detail} element={<Detail />} />
           <Route path={routes.Signup} element={<Register />} />
           <Route path={routes.Signin} element={<Login />} />
-          <Route path={routes.Intro} element={<Intro />} />
-          <Route path={routes.home} element={<Home />} />
+          <Route path={routes.Intro} element={<Home />} />
+          <Route path={routes.home} element={<Intro />} />
         </Routes>
       </HashRouter>
     </>
