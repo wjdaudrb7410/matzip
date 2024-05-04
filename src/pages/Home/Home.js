@@ -16,22 +16,16 @@ import { HelmetTitle } from "../../components/HelmetTitle";
 import { Mycolor, NO_IMG } from "../../theme";
 
 import { CircleFlag } from "react-circle-flags";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Code, SearchKey, ServiceArea, ServiceName } from "../../api";
 import { useQuery } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import { Footer } from "../../components/Footer";
 import { QuestionOutlineIcon } from "@chakra-ui/icons";
 import { useTranslation } from "react-i18next";
 import { Loading } from "../../components/Loading";
-const settings = {
-  infinite: true,
-  speed: 500,
-  slidesToShow: 3,
-  slidesToScroll: 3,
-  touchThreshold: 100,
-};
+
 const RandomMenu = ["국수", "치킨", "낙지"];
 const Menu = [
   { index: 0, title: "한식", keyword: "한", countryCode: "kr" },
@@ -45,7 +39,9 @@ const Recommend = [
   { title: "회", index: 103 },
 ];
 export const Home = () => {
+  const nav = useNavigate();
   const { t, i18n } = useTranslation();
+  const [dragging, setDragging] = useState(false);
   const [currentLng, SetLng] = useState(
     i18n.resolvedLanguage === "ko" ? ServiceArea.Korea : ServiceArea.English
   );
@@ -112,6 +108,22 @@ export const Home = () => {
     const randomIndex = Math.floor(Math.random() * RandomMenu.length);
     SetMenu(RandomMenu[randomIndex]);
     SetCount(RandomMenu[randomIndex]);
+  };
+  const handleBeforeChange = useCallback(() => {
+    setDragging(true);
+  }, [setDragging]);
+
+  const handleAfterChange = useCallback(() => {
+    setDragging(false);
+  }, [setDragging]);
+  //Setting
+  const settings = {
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 3,
+    beforeChange: handleBeforeChange,
+    afterChange: handleAfterChange,
   };
   return (
     <>
@@ -271,6 +283,7 @@ export const Home = () => {
                             <Slider {...settings}>
                               {data?.items?.item.map((data) => (
                                 <Box
+                                  cursor={"pointer"}
                                   w={"150px"}
                                   h={"200px"}
                                   key={data.contentid}
@@ -279,37 +292,45 @@ export const Home = () => {
                                   bg={Mycolor.DataCover}
                                   fontSize={"16px"}
                                   fontWeight={300}
+                                  onClick={(e) => {
+                                    if (dragging) {
+                                      e.stopPropagation();
+                                      return;
+                                    } else {
+                                      nav(
+                                        `/Detail/${data.contentid}/${currentCount}`
+                                      );
+                                    }
+                                  }}
                                 >
-                                  <Link to={`/detail/${data.contentid}`}>
-                                    {data?.firstimage ? (
-                                      <>
-                                        <Image
-                                          src={data.firstimage}
-                                          width={"100%"}
-                                          h={"120px"}
-                                          objectFit={"cover"}
-                                        ></Image>
-                                      </>
-                                    ) : (
-                                      <>
-                                        <Image
-                                          src={NO_IMG}
-                                          width={"100%"}
-                                          h={"120px"}
-                                          objectFit={"cover"}
-                                        ></Image>
-                                      </>
-                                    )}
-                                    <VStack
-                                      spacing={1}
-                                      padding={"0 10px"}
-                                      alignItems={"start"}
-                                      h={"80px"}
-                                      justifyContent={"center"}
-                                    >
-                                      <Text>{data.title}</Text>
-                                    </VStack>
-                                  </Link>
+                                  {data?.firstimage ? (
+                                    <>
+                                      <Image
+                                        src={data.firstimage}
+                                        width={"100%"}
+                                        h={"120px"}
+                                        objectFit={"cover"}
+                                      ></Image>
+                                    </>
+                                  ) : (
+                                    <>
+                                      <Image
+                                        src={NO_IMG}
+                                        width={"100%"}
+                                        h={"120px"}
+                                        objectFit={"cover"}
+                                      ></Image>
+                                    </>
+                                  )}
+                                  <VStack
+                                    spacing={1}
+                                    padding={"0 10px"}
+                                    alignItems={"start"}
+                                    h={"80px"}
+                                    justifyContent={"center"}
+                                  >
+                                    <Text>{data.title}</Text>
+                                  </VStack>
                                 </Box>
                               ))}
                             </Slider>

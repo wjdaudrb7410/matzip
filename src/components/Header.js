@@ -33,7 +33,7 @@ export const Header = () => {
         display={"flex"}
         flexDirection={"column"}
         bg={Mycolor.HeaderBg}
-        zIndex={1}
+        zIndex={3}
       >
         <Box
           display={"flex"}

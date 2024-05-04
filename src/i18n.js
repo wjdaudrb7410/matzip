@@ -20,7 +20,9 @@ i18n
             Title: "부산에 있는 맛집들로 떠나보세요",
             PlaceHolder: "시작하기",
           },
-          Home: {},
+          Home: {
+            Title: "오늘은 어디로 가볼까요?",
+          },
           Detail: {},
           FoF: {},
           Loading: {
@@ -35,7 +37,9 @@ i18n
             Title: "Let’s go to delicious restaurants in Busan",
             PlaceHolder: "Let's Start",
           },
-          Home: {},
+          Home: {
+            Title: "Where should we go today?",
+          },
           Detail: {},
           FoF: {},
           Loading: {
