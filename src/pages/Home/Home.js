@@ -2,6 +2,7 @@ import {
   Box,
   Container,
   HStack,
+  Icon,
   Image,
   Spinner,
   Text,
@@ -21,13 +22,17 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import { Footer } from "../../components/Footer";
+import { QuestionOutlineIcon } from "@chakra-ui/icons";
+import { useTranslation } from "react-i18next";
+import { Loading } from "../../components/Loading";
 const settings = {
   infinite: true,
   speed: 500,
   slidesToShow: 3,
   slidesToScroll: 3,
-  touchThreshold: 30,
+  touchThreshold: 100,
 };
+const RandomMenu = ["국수", "치킨", "낙지"];
 const Menu = [
   { index: 0, title: "한식", keyword: "한", countryCode: "kr" },
   { index: 1, title: "중식", keyword: "반점", countryCode: "cn" },
@@ -40,12 +45,16 @@ const Recommend = [
   { title: "회", index: 103 },
 ];
 export const Home = () => {
+  const { t, i18n } = useTranslation();
+  const [currentLng, SetLng] = useState(
+    i18n.resolvedLanguage === "ko" ? ServiceArea.Korea : ServiceArea.English
+  );
   const [currentMenu, SetMenu] = useState("한");
   const [currentIndex, SetIndex] = useState(0);
   const [currentCount, SetCount] = useState("한식");
   const [recmData, SetRData] = useState();
   const [MenuData, SetData] = useState();
-
+  //UseQuery
   const { data: mdata, isLoading: misLoading } = useQuery({
     queryKey: [
       ServiceArea.Korea,
@@ -87,7 +96,7 @@ export const Home = () => {
     ],
     queryFn: SearchKey,
   });
-
+  //UseEffect
   useEffect(() => {
     SetData(mdata?.response?.body);
   }, [mdata]);
@@ -98,13 +107,18 @@ export const Home = () => {
       { ...r3data?.response?.body, ...Recommend[2] },
     ]);
   }, [r1data, r2data, r3data]);
-  console.log(recmData);
+  //Function
+  const Random = () => {
+    const randomIndex = Math.floor(Math.random() * RandomMenu.length);
+    SetMenu(RandomMenu[randomIndex]);
+    SetCount(RandomMenu[randomIndex]);
+  };
   return (
     <>
       <HelmetTitle title={"Home"} />
       <Container
         maxW={"500px"}
-        padding={"0 20px"}
+        padding={"90px 20px 50px 20px"}
         bg={Mycolor.ContentWrap}
         display={"flex"}
         flexDirection={"column"}
@@ -149,6 +163,32 @@ export const Home = () => {
                 <Text>{data.title}</Text>
               </VStack>
             ))}
+            <VStack cursor={"pointer"}>
+              <Box
+                w={{ base: "45px", sm: "60px" }}
+                h={{ base: "45px", sm: "60px" }}
+              >
+                <Icon
+                  w={"100%"}
+                  h={"100%"}
+                  as={QuestionOutlineIcon}
+                  color={Mycolor.Text}
+                  style={{
+                    border:
+                      currentIndex === 5
+                        ? `2px solid ${Mycolor.Point}`
+                        : "none",
+                    borderRadius: "50%",
+                  }}
+                  onClick={() => {
+                    SetIndex(5);
+                    Random();
+                  }}
+                />
+              </Box>
+
+              <Text>랜덤</Text>
+            </VStack>
           </HStack>
 
           {misLoading ? (
@@ -159,13 +199,7 @@ export const Home = () => {
               alignItems={"center"}
               justifyContent={"center"}
             >
-              <Spinner
-                thickness="4px"
-                speed="0.6s"
-                emptyColor={Mycolor.body}
-                color={Mycolor.Point}
-                size="xl"
-              ></Spinner>
+              <Loading t={t} Mycolor={Mycolor} />
             </Box>
           ) : (
             MenuData && (
@@ -183,7 +217,7 @@ export const Home = () => {
                         borderRadius={12}
                         overflow={"hidden"}
                       >
-                        <Link to={`/detail/${data.contentid}`}>
+                        <Link to={`/detail/${data.contentid}/${currentCount}`}>
                           {data?.firstimage ? (
                             <Image
                               w={"100%"}

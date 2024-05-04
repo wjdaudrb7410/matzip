@@ -1,10 +1,23 @@
-import { Box, Button, Container, Text } from "@chakra-ui/react";
+import { Box, Button, Container, Text, keyframes } from "@chakra-ui/react";
 import { MdLocalDining } from "react-icons/md";
 import { Mycolor } from "../../theme";
 import { useNavigate } from "react-router-dom";
 import { routes } from "../../routes";
+import { Trans, useTranslation } from "react-i18next";
 
+const spin = keyframes`  
+   0% {
+            opacity: 0;
+            transform: translate3d(0, 100%, 0);
+        }
+        to {
+            opacity: 1;
+            transform: translateZ(0);
+        }
+`;
 export const Intro = () => {
+  const { t, i18n } = useTranslation();
+  const spinAnimation = `${spin}  1s linear`;
   window.localStorage.setItem("Language", "Kor");
   const nav = useNavigate();
   return (
@@ -19,8 +32,12 @@ export const Intro = () => {
         justifyContent={"center"}
         textAlign={"center"}
       >
-        <MdLocalDining color={Mycolor.Point} size={100} />
+        <Box animation={spinAnimation}>
+          <MdLocalDining color={Mycolor.Point} size={100} />
+        </Box>
+
         <Text
+          animation={spinAnimation}
           fontSize={"40px"}
           textTransform={"uppercase"}
           fontWeight={900}
@@ -28,8 +45,13 @@ export const Intro = () => {
         >
           MatZip
         </Text>
-        <Text color={Mycolor.Text} fontSize={"16px"} fontWeight={300}>
-          부산에 있는 맛집들로 떠나보세요
+        <Text
+          color={Mycolor.Text}
+          fontSize={"16px"}
+          fontWeight={300}
+          animation={spinAnimation}
+        >
+          <Trans i18nKey={"Intro.Title"} />
         </Text>
         <Button
           color={Mycolor.Text}
@@ -41,7 +63,7 @@ export const Intro = () => {
             nav(routes.Intro);
           }}
         >
-          시작하기
+          <Trans i18nKey={"Intro.PlaceHolder"}></Trans>
         </Button>
       </Container>
     </>

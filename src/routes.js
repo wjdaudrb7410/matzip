@@ -3,7 +3,7 @@ export const routes = {
   FoF: "/*",
   Signin: "/Signin",
   Signup: "/Signup",
-  Detail: "/detail/:id",
+  Detail: "/detail/:id/:Category",
   Search: "/Search/:keyword",
   Intro: "/Intro",
 };

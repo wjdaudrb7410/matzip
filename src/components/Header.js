@@ -1,14 +1,5 @@
-import {
-  Avatar,
-  Box,
-  Divider,
-  HStack,
-  Input,
-  Text,
-  VStack,
-  flattenTokens,
-} from "@chakra-ui/react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Avatar, Box, HStack, Input } from "@chakra-ui/react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Mycolor } from "../theme";
 import { MdLocalDining } from "react-icons/md";
 import { FaSearch } from "react-icons/fa";
@@ -19,7 +10,7 @@ import { ErrText } from "./ErrText";
 
 export const Header = () => {
   const onSubmit = (data) => {
-    console.log(data);
+    nav(`/Search/${data.Keyword}`);
   };
   const {
     register,
@@ -32,15 +23,17 @@ export const Header = () => {
   return (
     <>
       <Box
+        backdropFilter={"auto"}
+        backdropBlur="8px"
         maxW={"500px"}
-        padding={"20px 20px"}
+        padding={"40px 20px"}
         width={"100%"}
         position={"fixed"}
         top={0}
         display={"flex"}
         flexDirection={"column"}
-        bg={Mycolor.ContentWrap}
-        zIndex={3}
+        bg={Mycolor.HeaderBg}
+        zIndex={1}
       >
         <Box
           display={"flex"}
@@ -53,7 +46,7 @@ export const Header = () => {
             color={Mycolor.Point}
             size={40}
             cursor={"pointer"}
-            onClick={() => nav(routes.home)}
+            onClick={() => nav(routes.Intro)}
           />
           <HStack spacing={10} style={{}}>
             <Box sx={{ "svg:hover": { fill: Mycolor.HeaderButtonHover } }}>

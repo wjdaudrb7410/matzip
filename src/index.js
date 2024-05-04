@@ -6,7 +6,9 @@ import { Router } from "./Router";
 import { HelmetProvider } from "react-helmet-async";
 import theme from "./theme";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import "./i18n";
 const queryClient = new QueryClient();
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
