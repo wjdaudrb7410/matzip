@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { HelmetTitle } from "../../components/HelmetTitle";
 import { Header } from "../../components/Header";
-import { Mycolor } from "../../theme";
+import { Mycolor, NO_IMG } from "../../theme";
 import { useQuery } from "@tanstack/react-query";
 import { ServiceArea, ServiceName, ShowDetail } from "../../api";
 import { useParams } from "react-router-dom";
@@ -27,11 +27,12 @@ import {
 } from "react-kakao-maps-sdk";
 export const Detail = () => {
   useKakaoLoader();
+  const parser = new DOMParser();
   const { t, i18n } = useTranslation();
   const [kdata, SetData] = useState();
   const [currentMenu, SetMenu] = useState();
   const { id, Category } = useParams();
-  console.log(id);
+
   const { data: sdata, isLoading: sLoading } = useQuery({
     queryKey: [ServiceArea.Korea, ServiceName.Detail, id],
     queryFn: ShowDetail,
@@ -39,9 +40,8 @@ export const Detail = () => {
   });
   useEffect(() => {
     SetData(sdata?.response?.body?.items?.item[0]);
-    console.log(kdata);
   }, [sdata]);
-  console.log(Category);
+
   return (
     <>
       <HelmetTitle title={"Detail"} />
@@ -75,7 +75,21 @@ export const Detail = () => {
                 borderRadius={"15px"}
                 overflow={"hidden"}
               >
-                <Image src={kdata?.firstimage} objectFit={"cover"}></Image>
+                {kdata?.firstimage ? (
+                  <Image
+                    src={kdata?.firstimage}
+                    objectFit={"cover"}
+                    w={"100%"}
+                    h={"200px"}
+                  ></Image>
+                ) : (
+                  <Image
+                    src={NO_IMG}
+                    w={"100%"}
+                    h={"200px"}
+                    objectFit={"cover"}
+                  ></Image>
+                )}
               </Box>
               <VStack marginTop={"30px"} w={"100%"} spacing={4}>
                 <Text fontSize={"24px"} fontWeight={600}>
@@ -116,7 +130,7 @@ export const Detail = () => {
                 <ZoomControl position={"RIGHT"} />
               </Map>
               <Text padding={"0 30px"} opacity={0.7}>
-                {kdata.overview}
+                {kdata.overview.replace(/(<br>|<br\/>|<br \/>)/g, "\n")}
               </Text>
             </>
           )

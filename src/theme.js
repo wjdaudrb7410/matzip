@@ -15,6 +15,7 @@ export const Mycolor = {
   HeaderButtonHover: "#4A5568",
   DataCover: "#171923",
   HeaderBg: "#1a202cd9",
+  HeartFill: "#E53E3E",
 };
 const theme = extendTheme({
   fonts: {
@@ -31,10 +32,10 @@ const theme = extendTheme({
         letterSpacing: "tight",
         textTransform: i18n.language === "ko" ? "none" : "uppercase",
       },
-      input: {
+      Input: {
         color: Mycolor.Text,
       },
-      button: {
+      Button: {
         textTransform: i18n.language === "ko" ? "none" : "uppercase",
       },
     },

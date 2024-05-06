@@ -7,6 +7,7 @@ import { Login } from "./pages/Login/Login";
 import { Register } from "./pages/Login/Register";
 import { Detail } from "./pages/Detail/Detail";
 import { FoF } from "./pages/FoF/FoF";
+import { Search } from "./pages/Search/Search";
 
 export const Router = () => {
   return (
@@ -15,6 +16,7 @@ export const Router = () => {
         <UseScrollTo />
         <Routes>
           <Route path={routes.FoF} element={<FoF />} />
+          <Route path={routes.Search} element={<Search />} />
           <Route path={routes.Detail} element={<Detail />} />
           <Route path={routes.Signup} element={<Register />} />
           <Route path={routes.Signin} element={<Login />} />

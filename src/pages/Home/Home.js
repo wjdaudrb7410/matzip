@@ -23,7 +23,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import { Footer } from "../../components/Footer";
 import { QuestionOutlineIcon } from "@chakra-ui/icons";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { Loading } from "../../components/Loading";
 
 const RandomMenu = ["국수", "치킨", "낙지"];
@@ -34,9 +34,9 @@ const Menu = [
   { index: 3, title: "양식", keyword: "한", countryCode: "us" },
 ];
 const Recommend = [
-  { title: "국밥", index: 101 },
-  { title: "고기", index: 102 },
-  { title: "회", index: 103 },
+  { title: "국밥", SubTitle: { ko: "국밥", en: "Gukbap" }, index: 101 },
+  { title: "고기", SubTitle: { ko: "고기", en: "Meat" }, index: 102 },
+  { title: "회", SubTitle: { ko: "회", en: "Sushi" }, index: 103 },
 ];
 export const Home = () => {
   const nav = useNavigate();
@@ -147,7 +147,7 @@ export const Home = () => {
           alignItems={"center"}
         >
           <Text width={"100%"} fontSize={24} fontWeight={600}>
-            오늘은 어디로 가볼까요?
+            <Trans i18nKey={"Home.Title"}></Trans>
           </Text>
           <HStack spacing={"40px"} marginTop={10}>
             {Menu.map((data) => (
@@ -217,7 +217,11 @@ export const Home = () => {
             MenuData && (
               <>
                 <Box width={"100%"} marginTop={"20px"}>
-                  <Text fontSize={20}>{currentCount} 잘하는 맛집</Text>
+                  <Text fontSize={20}>
+                    {currentCount}
+                    &nbsp;
+                    <Trans i18nKey={"Home.SubTitle"}></Trans>
+                  </Text>
 
                   <VStack spacing={"30px"} marginTop={"20px"}>
                     {MenuData?.items?.item.map((data) => (
@@ -266,14 +270,20 @@ export const Home = () => {
                 {recmData && (
                   <>
                     <Box marginTop={50} w={"100%"} overflow={"hidden"}>
-                      <Text>당신을 위한 추천</Text>
+                      <Text>
+                        <Trans i18nKey={"Home.Recommend"}></Trans>
+                      </Text>
                       {recmData?.map((data) => (
                         <VStack
                           key={data.index}
                           alignItems={"flex-start"}
                           marginTop={"30px"}
                         >
-                          <Text>{data.title}</Text>
+                          <Text>
+                            {i18n.resolvedLanguage === "ko"
+                              ? data.SubTitle.ko
+                              : data.SubTitle.en}
+                          </Text>
                           <Box
                             w={"100%"}
                             h={"200px"}

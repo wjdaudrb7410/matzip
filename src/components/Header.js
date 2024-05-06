@@ -1,4 +1,11 @@
-import { Avatar, Box, HStack, Input } from "@chakra-ui/react";
+import {
+  Avatar,
+  Box,
+  HStack,
+  Input,
+  InputGroup,
+  InputLeftElement,
+} from "@chakra-ui/react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Mycolor } from "../theme";
 import { MdLocalDining } from "react-icons/md";
@@ -7,8 +14,13 @@ import { useState } from "react";
 import { routes } from "../routes";
 import { useForm } from "react-hook-form";
 import { ErrText } from "./ErrText";
+import { Trans, useTranslation } from "react-i18next";
+import { SearchIcon } from "@chakra-ui/icons";
 
 export const Header = () => {
+  const location = useLocation();
+
+  const { t, i18n } = useTranslation();
   const onSubmit = (data) => {
     nav(`/Search/${data.Keyword}`);
   };
@@ -57,20 +69,34 @@ export const Header = () => {
                 onClick={() => SetClick(!isclick)}
               />
             </Box>
-            <Avatar size={"xs"} cursor={"pointer"} />
+            <Avatar
+              name={location?.state?.Username}
+              size={"xs"}
+              cursor={"pointer"}
+              onClick={() => {
+                nav(routes.Signin);
+              }}
+            />
           </HStack>
         </Box>
 
         <Box
           as="form"
-          margin={"20px 0"}
+          marginTop={"20px"}
           display={isclick ? "block" : "none"}
           onSubmit={handleSubmit(onSubmit)}
+          textAlign={"left"}
         >
-          <Input
-            placeholder="음식점 이름을 검색하세요"
-            {...register("Keyword", { required: "키워드를 입력하세요" })}
-          />
+          <InputGroup>
+            <InputLeftElement>
+              <SearchIcon color={"#718096"} />
+            </InputLeftElement>
+            <Input
+              placeholder={t("Search.PlaceHolds")}
+              {...register("Keyword", { required: t("Errors.KeyWord") })}
+            />
+          </InputGroup>
+
           <ErrText Texts={errors?.Keyword?.message}></ErrText>
         </Box>
       </Box>

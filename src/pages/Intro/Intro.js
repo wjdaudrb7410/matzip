@@ -4,6 +4,7 @@ import { Mycolor } from "../../theme";
 import { useNavigate } from "react-router-dom";
 import { routes } from "../../routes";
 import { Trans, useTranslation } from "react-i18next";
+import { ChngLng } from "../../components/ChngLng";
 
 const spin = keyframes`  
    0% {
@@ -54,9 +55,9 @@ export const Intro = () => {
           <Trans i18nKey={"Intro.Title"} />
         </Text>
         <Button
-          color={Mycolor.Text}
           w={"100%"}
           marginTop={"60px"}
+          color={Mycolor.Text}
           bg={Mycolor.Point}
           _hover={{ bg: Mycolor.ButtonHover }}
           onClick={() => {
@@ -65,6 +66,7 @@ export const Intro = () => {
         >
           <Trans i18nKey={"Intro.PlaceHolder"}></Trans>
         </Button>
+        <ChngLng></ChngLng>
       </Container>
     </>
   );

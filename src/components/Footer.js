@@ -1,6 +1,7 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Button, Text } from "@chakra-ui/react";
 import { Mycolor } from "../theme";
 import { ReactIcon } from "@chakra-ui/icons";
+import { ChngLng } from "./ChngLng";
 
 export const Footer = () => {
   return (
@@ -24,6 +25,7 @@ export const Footer = () => {
         <Text color={"gray"} opacity={0.7} fontSize={"12px"} fontWeight={"300"}>
           Powered By <ReactIcon /> , Data.go.kr
         </Text>
+        <ChngLng></ChngLng>
       </Box>
     </>
   );
